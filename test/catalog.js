@@ -316,5 +316,39 @@ describe('Catalog', function() {
         });
       });
     });
+
+    describe('register', function() {
+      it('should work', function(done) {
+        this.nock
+          .put('/v1/catalog/register', {
+            Datacenter: 'test',
+            Node: 'local',
+            Address: '10.0.0.1',
+            Service: {
+              ID: 'test',
+              Service: 'test',
+              Port: 8080
+            }
+          })
+          .reply(200, [{ ok: true }]);
+
+        this.consul.catalog.register({
+            Datacenter: 'test',
+            Node: 'local',
+            Address: '10.0.0.1',
+            Service: {
+              ID: 'test',
+              Service: 'test',
+              Port: 8080
+            }
+        }, function(err, data) {
+          should.not.exist(err);
+
+          should(data).eql([{ ok: true }]);
+
+          done();
+        });
+      });
+    });
   });
 });

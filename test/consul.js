@@ -136,6 +136,8 @@ describe('Consul', function() {
         '  - datacenters (callback)',
         '  - nodes (callback)',
         '  - services (callback)',
+        '  - register (callback)',
+        '  - deregister (callback)',
         '  Node',
         '   - list (callback)',
         '   - services (callback)',
